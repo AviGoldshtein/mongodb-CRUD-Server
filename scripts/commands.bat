@@ -1,4 +1,5 @@
 oc apply -f ..\infrastructure\k8s\mongoDB-secret.yaml
+oc apply -f ..\infrastructure\k8s\mongoDB-pvc.yaml
 oc apply -f ..\infrastructure\k8s\mongoDB-deployment.yaml
 oc apply -f ..\infrastructure\k8s\mongoDB-svc.yaml
 oc apply -f ..\infrastructure\k8s\crud-app-secret.yaml

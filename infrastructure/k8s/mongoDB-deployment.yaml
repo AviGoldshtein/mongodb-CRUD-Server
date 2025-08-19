@@ -21,27 +21,29 @@ spec:
             - containerPort: 27017
               protocol: TCP
           env:
-          - name: MONGODB_HOST
+          - name: MONGO_DATABASE
             valueFrom:
                 secretKeyRef:
                   name: mongodb-secret
-                  key: MONGODB_HOST
-          - name: MONGODB_DATABASE
+                  key: MONGO_DATABASE
+          - name: MONGO_USER
             valueFrom:
                 secretKeyRef:
                   name: mongodb-secret
-                  key: MONGODB_DATABASE
-          - name: MONGODB_USER
+                  key: MONGO_USER
+          - name: MONGO_PASSWORD
             valueFrom:
                 secretKeyRef:
                   name: mongodb-secret
-                  key: MONGODB_USER
-          - name: MONGODB_PASSWORD
-            valueFrom:
-                secretKeyRef:
-                  name: mongodb-secret
-                  key: MONGODB_PASSWORD
+                  key: MONGO_PASSWORD
+          volumeMounts:
+            - name: mongo-storage
+              mountPath: /var/lib/mongo_data
       imagePullSecrets: []
+      volumes:
+        - name: mongo-storage
+          persistentVolumeClaim:
+            claimName: mongodb-pvc
   strategy:
     type: RollingUpdate
     rollingUpdate:
