@@ -11,6 +11,11 @@ class Soldier(BaseModel):
     phone_number: int
     rank: str
 
+class UpdateSolderRequest(BaseModel):
+    ID: int
+    field: str
+    value: str
+
 app = FastAPI()
 dal = DataLoader()
 
@@ -33,3 +38,14 @@ def insert_soldier(solder: Soldier):
         rank=solder.rank
     )
 
+@app.put("/update_soldier")
+def update_soldier(details: UpdateSolderRequest):
+    return dal.update_soldier(
+        ID=details.ID,
+        field=details.field,
+        value=details.value
+    )
+
+@app.delete("/delete_soldier/{ID}")
+def delete_soldier(ID: int):
+    return dal.delete_soldier(ID=ID)
