@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: david-eini12-dev
+  name: mongodb-crud
+spec:
+  selector:
+    matchLabels:
+      app: mongodb-crud
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: mongodb-crud
+    spec:
+      containers:
+        - name: mongodb-crud
+          image: ####################################################################
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          env: 
+          - name: MONGO_HOST
+            valueFrom:
+                secretKeyRef:
+                  name: mongodb-crud-secret
+                  key: MONGO_HOST
+          - name: MONGO_DATABASE
+            valueFrom:
+                secretKeyRef:
+                  name: mongodb-crud-secret
+                  key: MONGO_DATABASE
+          - name: MONGO_USER
+            valueFrom:
+                secretKeyRef:
+                  name: mongodb-crud-secret
+                  key: MONGO_USER
+          - name: MONGO_PASSWORD
+            valueFrom:
+                secretKeyRef:
+                  name: mongodb-crud-secret
+                  key: MONGO_PASSWORD
+          - name: MONGO_PORT
+            valueFrom:
+                secretKeyRef:
+                  name: mongodb-crud-secret
+                  key: MONGO_PORT
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
