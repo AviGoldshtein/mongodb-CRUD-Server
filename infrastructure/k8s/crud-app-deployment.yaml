@@ -18,17 +18,29 @@ spec:
         image: avigoldshtein/crud-app-with-mongo:latest
         env:
         - name: MONGO_HOST
-          value: mongo
+          valueFrom:
+            secretKeyRef:
+              name: mongo-crud-secret
+              key: MONGO_HOST
         - name: MONGO_PORT
-          value: "27017"
+          valueFrom:
+            secretKeyRef:
+              name: mongo-crud-secret
+              key: MONGO_PORT
         - name: MONGO_USER
-          value: root
-        - name: MONGO_DATABASE
-          value: enemy_soldiers
+          valueFrom:
+            secretKeyRef:
+              name: mongo-crud-secret
+              key: MONGO_USER
         - name: MONGO_PASSWORD
           valueFrom:
             secretKeyRef:
               name: mongo-crud-secret
               key: MONGO_PASSWORD
+        - name: MONGO_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mongo-crud-secret
+              key: MONGO_DATABASE
         ports:
         - containerPort: 8000
