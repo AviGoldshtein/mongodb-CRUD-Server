@@ -4,9 +4,9 @@ metadata:
   name: mongodb-pvc
   namespace: david-eini12-dev
 spec:
+  storageClassName: gp3
   accessModes:
     - ReadWriteOnce
-  volumeMode: Filesystem
   resources:
     requests:
       storage: 1Gi

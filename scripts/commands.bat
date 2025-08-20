@@ -10,14 +10,14 @@ oc apply -f .\crud-app-deployment.yaml
 oc apply -f .\crud-app-svc.yaml
 oc apply -f .\crud-app-route.yaml
 
-set POD_NAME=mongodb-deployment-5b8fcc9df5-gjhbg
+@REM set POD_NAME=python-app-crud-mongo-6d7479b994-2jf8s
 
-oc cp .\create-insert-data.sh %POD_NAME%:/tmp/create-insert-data.sh
+@REM oc cp .\create-insert-data.sh %POD_NAME%:/tmp/create-insert-data.sh
 
-oc exec -i %POD_NAME% -- /bin/bash -c "mongosh -u root -p pass --authenticationDatabase admin enemy_soldiers --file './tmp/create-insert-data.sh'"
+@REM oc exec -i %POD_NAME% -- /bin/bash -c "mongosh -u root -p pass --authenticationDatabase admin enemy_soldiers --file './tmp/create-insert-data.sh'"
 
 
-set POD_NAME=mongodb-deployment-5b8fcc9df5-gjhbg
-oc rsh %POD_NAME% 
-mongosh -u root -p pass --authenticationDatabase admin enemy_soldiers
-db.createCollection("soldier_details")
+@REM set POD_NAME=python-app-crud-mongo-6d7479b994-2jf8s
+@REM oc rsh %POD_NAME% 
+@REM mongosh -u root -p pass --authenticationDatabase admin enemy_soldiers
+@REM db.createCollection("soldier_details")
