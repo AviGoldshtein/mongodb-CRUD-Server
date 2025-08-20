@@ -17,7 +17,7 @@ spec:
         - name: mongodb-crud
           image: avigoldshtein/crud-app-with-mongo:latest
           ports:
-            - containerPort: 8080
+            - containerPort: 8000
               protocol: TCP
           env: 
           - name: MONGO_HOST
