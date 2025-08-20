@@ -30,7 +30,7 @@ class MongoConnector:
         for _ in range(10):
             try:
                 self.client = MongoClient(uri, serverSelectionTimeoutMS=3000)
-                self.client.admin.command("ping")  # בדיקת חיבור
+                self.client.admin.command("ping")
                 self.db = self.client[database]
                 return self.db
             except ConnectionFailure:

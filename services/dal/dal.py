@@ -6,17 +6,17 @@ class DataLoader:
     def __init__(self):
         self.connector = MongoConnector()
 
-    def get_all_soldiers(self):
+    def get_all_soldiers(self, collection = "soldier_details"):
         db = self.connector.get_connection()
-        collection = db["soldier_details"]
+        collection = db[collection]
         rows = list(collection.find({}))
         self.connector.close_connection()
         return rows
 
-    def insert_soldier(self, ID, first_name, last_name, phone_number, rank):
+    def insert_soldier(self, ID, first_name, last_name, phone_number, rank, collection = "soldier_details"):
         soldier = Soldier(ID, first_name, last_name, phone_number, rank)
         db = self.connector.get_connection()
-        collection = db["soldier_details"]
+        collection = db[collection]
         result = collection.find({'ID': ID})
         if list(result):
             self.connector.close_connection()
@@ -29,9 +29,9 @@ class DataLoader:
         self.connector.close_connection()
         return {"msg": "there is a problem in the insertion"}
 
-    def update_soldier(self, ID, field, value):
+    def update_soldier(self, ID, field, value, collection = "soldier_details"):
         db = self.connector.get_connection()
-        collection = db["soldier_details"]
+        collection = db[collection]
         result = collection.update_one(
             {"ID": ID},
             {"$set": {field: value}}
@@ -43,9 +43,9 @@ class DataLoader:
         self.connector.close_connection()
         return {"msg": f"there is no document with ID: {ID}."}
 
-    def delete_soldier(self, ID):
+    def delete_soldier(self, ID, collection = "soldier_details"):
         db = self.connector.get_connection()
-        collection = db["soldier_details"]
+        collection = db[collection]
         result = collection.delete_one({'ID': ID})
         if result.deleted_count:
             self.connector.close_connection()
