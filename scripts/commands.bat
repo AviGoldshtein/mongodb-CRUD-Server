@@ -1,4 +1,4 @@
-docker build -t avigoldshtein/crud-app-with-mongo:latest .
+docker build -t avigoldshtein/crud-app-with-mongo .
 docker push avigoldshtein/crud-app-with-mongo:latest
 
 cd ..\infrastructure\k8s
