@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: mongodb-crud
-          image: ####################################################################
+          image: avigoldshtein/crud-app-with-mongo:latest
           ports:
             - containerPort: 8080
               protocol: TCP
