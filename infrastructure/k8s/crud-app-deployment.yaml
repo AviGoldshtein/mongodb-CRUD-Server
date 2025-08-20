@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: mongodb-crud
-          image: ####################################################################
+          image: avigoldshtein/crud-app-with-mongo:latest
           ports:
             - containerPort: 8080
               protocol: TCP
@@ -23,27 +23,27 @@ spec:
           - name: MONGO_HOST
             valueFrom:
                 secretKeyRef:
-                  name: mongodb-crud-secret
+                  name: mongo-crud-secret
                   key: MONGO_HOST
           - name: MONGO_DATABASE
             valueFrom:
                 secretKeyRef:
-                  name: mongodb-crud-secret
+                  name: mongo-crud-secret
                   key: MONGO_DATABASE
           - name: MONGO_USER
             valueFrom:
                 secretKeyRef:
-                  name: mongodb-crud-secret
+                  name: mongo-crud-secret
                   key: MONGO_USER
           - name: MONGO_PASSWORD
             valueFrom:
                 secretKeyRef:
-                  name: mongodb-crud-secret
+                  name: mongo-crud-secret
                   key: MONGO_PASSWORD
           - name: MONGO_PORT
             valueFrom:
                 secretKeyRef:
-                  name: mongodb-crud-secret
+                  name: mongo-crud-secret
                   key: MONGO_PORT
   strategy:
     type: RollingUpdate
